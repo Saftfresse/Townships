@@ -45,21 +45,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AirTownship.cs" />
     <Compile Include="Classes\Building.cs" />
     <Compile Include="Classes\Collection.cs" />
     <Compile Include="Classes\Factory.cs" />
+    <Compile Include="Classes\Gameworld.cs" />
+    <Compile Include="Classes\LandTownship.cs" />
+    <Compile Include="Classes\SpaceTownship.cs" />
     <Compile Include="Classes\Township.cs" />
     <Compile Include="Classes\TownshipGridCell.cs" />
+    <Compile Include="Classes\WaterTownship.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_ShipView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ShipView.Designer.cs">
+      <DependentUpon>Form_ShipView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ShipView.resx">
+      <DependentUpon>Form_ShipView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -69,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -82,6 +97,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tiers-0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tiers-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tiers-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tiers-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\OneDrive - Sycor GmbH\Projekte\ProjectClassLib\ProjectClassLib\ProjectClassLib.csproj">
+      <Project>{929ED699-938B-404D-90F9-628B742DD515}</Project>
+      <Name>ProjectClassLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

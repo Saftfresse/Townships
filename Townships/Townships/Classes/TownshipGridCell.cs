@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace Townships.Classes
             X
         }
 
+        Rectangle bounds = new Rectangle();
         private TownCellSize cellSize;
         private TownCellTier cellTier;
         Building building;
@@ -41,5 +43,6 @@ namespace Townships.Classes
         public Building Building { get => building; set => building = value; }
         public TownCellSize CellSize { get => cellSize; set => cellSize = value; }
         public TownCellTier CellTier { get => cellTier; set => cellTier = value; }
+        public Rectangle Bounds { get => bounds; set => bounds = value; }
     }
 }

@@ -10,14 +10,36 @@ namespace Townships.Classes
     {
         public Township()
         {
-            for (int i = 0; i < cells.Length; i++)
+            for (int i = 0; i < 9; i++)
             {
-                
+                cells.Add(new TownshipGridCell());
             }
         }
 
-        TownshipGridCell[,] cells = new TownshipGridCell[3,3];
+        public enum TownshipType
+        {
+            Water,
+            Land,
+            Air,
+            Space
+        }
 
-        public TownshipGridCell[,] Cells { get => cells; set => cells = value; }
+
+        string name = "";
+        double costMaintainance = 0.0;
+        double baseCost = 0.0;
+        double speed = 1.0;
+
+        Guid uid = Guid.NewGuid();
+        TownshipType shipType;
+        List<TownshipGridCell> cells = new List<TownshipGridCell>();
+
+        public List<TownshipGridCell> Cells { get => cells; set => cells = value; }
+        public TownshipType ShipType { get => shipType; set => shipType = value; }
+        public string Name { get => name; set => name = value; }
+        public Guid Uid { get => uid; set => uid = value; }
+        public double CostMaintainance { get => costMaintainance; set => costMaintainance = value; }
+        public double BaseCost { get => baseCost; set => baseCost = value; }
+        public double Speed { get => speed; set => speed = value; }
     }
 }

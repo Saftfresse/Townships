@@ -9,6 +9,7 @@ namespace Townships.Classes
     public static class Collection
     {
         public static List<Classes.Building> Buildings = new List<Classes.Building>() { new Factory() { BuildingSize = TownshipGridCell.TownCellSize.B1, Name = "New Factory" } };
+
         public static Classes.Building GetBuilding(Building _name)
         {
             Classes.Building returnBuild = Classes.Building.NoBuilding();
