@@ -31,7 +31,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label_hr_1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.flow_cells = new System.Windows.Forms.FlowLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label_hr_2 = new System.Windows.Forms.Label();
+            this.canvas = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -62,22 +67,55 @@
             this.label2.Text = "Type";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // flow_cells
+            // label3
             // 
-            this.flow_cells.AutoScroll = true;
-            this.flow_cells.Location = new System.Drawing.Point(12, 91);
-            this.flow_cells.Name = "flow_cells";
-            this.flow_cells.Size = new System.Drawing.Size(966, 945);
-            this.flow_cells.TabIndex = 3;
-            this.flow_cells.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.flow_cells_MouseDoubleClick);
+            this.label3.Font = new System.Drawing.Font("Roboto Lt", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(992, 91);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(368, 32);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Cell-Data";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_hr_2
+            // 
+            this.label_hr_2.Location = new System.Drawing.Point(994, 123);
+            this.label_hr_2.Name = "label_hr_2";
+            this.label_hr_2.Size = new System.Drawing.Size(372, 1);
+            this.label_hr_2.TabIndex = 5;
+            this.label_hr_2.Paint += new System.Windows.Forms.PaintEventHandler(this.label4_Paint);
+            // 
+            // canvas
+            // 
+            this.canvas.Location = new System.Drawing.Point(3, 3);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(940, 383);
+            this.canvas.TabIndex = 6;
+            this.canvas.TabStop = false;
+            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
+            this.canvas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDoubleClick);
+            this.canvas.Resize += new System.EventHandler(this.canvas_Resize);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.canvas);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 91);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(974, 948);
+            this.flowLayoutPanel1.TabIndex = 7;
+            this.flowLayoutPanel1.WrapContents = false;
             // 
             // Form_ShipView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(19)))));
-            this.ClientSize = new System.Drawing.Size(1364, 1051);
-            this.Controls.Add(this.flow_cells);
+            this.ClientSize = new System.Drawing.Size(1371, 1051);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.label_hr_2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label_hr_1);
             this.Controls.Add(this.label1);
@@ -88,6 +126,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Township View";
             this.Load += new System.EventHandler(this.Form_ShipView_Load);
+            this.Resize += new System.EventHandler(this.Form_ShipView_Resize);
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -97,6 +138,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_hr_1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.FlowLayoutPanel flow_cells;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_hr_2;
+        private System.Windows.Forms.PictureBox canvas;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Townships.Classes
 {
-    public class WaterTownship:Township
+    public class SpaceTownship:Township
     {
-
-
+        public SpaceTownship()
+        {
+            ShipType = TownshipType.Space;
+        }
     }
 }

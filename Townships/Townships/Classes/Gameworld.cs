@@ -11,7 +11,7 @@ namespace Townships.Classes
         public Gameworld()
         {
             Random r = new Random(4);
-            Township sh = new Township();
+            LandTownship sh = new LandTownship();
             for (int i = 0; i < r.Next(3,8); i++)
             {
                 sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_1, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() });
@@ -29,8 +29,17 @@ namespace Townships.Classes
                 sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_4, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() });
             }
             sh.Name = "The Ultimus";
-            sh.ShipType = Township.TownshipType.Land;
             ships.Add(sh);
+            LandTownship sh2 = new LandTownship();
+            sh2.Cells.Clear();
+            sh2.Cells.AddRange(new TownshipGridCell[] {
+                        new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_1, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() },
+                        new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_1, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() },
+                        new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_1, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() },
+                        new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_2, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() }});
+            sh2.Name = "New Dawn";
+            ships.Add(sh2);
+
         }
 
         List<Township> ships = new List<Township>();

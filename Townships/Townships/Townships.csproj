@@ -45,16 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\AirTownship.cs" />
+    <Compile Include="Classes\Townships\AirTownship.cs" />
     <Compile Include="Classes\Building.cs" />
     <Compile Include="Classes\Collection.cs" />
     <Compile Include="Classes\Factory.cs" />
     <Compile Include="Classes\Gameworld.cs" />
-    <Compile Include="Classes\LandTownship.cs" />
-    <Compile Include="Classes\SpaceTownship.cs" />
-    <Compile Include="Classes\Township.cs" />
+    <Compile Include="Classes\Townships\LandTownship.cs" />
+    <Compile Include="Classes\Townships\SpaceTownship.cs" />
+    <Compile Include="Classes\Townships\Township.cs" />
     <Compile Include="Classes\TownshipGridCell.cs" />
-    <Compile Include="Classes\WaterTownship.cs" />
+    <Compile Include="Classes\Townships\WaterTownship.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

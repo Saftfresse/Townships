@@ -16,6 +16,8 @@ namespace Townships
     public partial class Form_ShipView : Form
     {
         Township township;
+        Bitmap screen;
+
         public Form_ShipView(Township ship)
         {
             township = ship;
@@ -30,106 +32,118 @@ namespace Townships
 
         private void Form_ShipView_Load(object sender, EventArgs e)
         {
+            screen = new Bitmap(canvas.Width, canvas.Height);
             label1.Text = township.Name;
             label2.Text = township.ShipType.ToString() + " Type";
-            List<TownshipGridCell> cellsSort = township.Cells.OrderByDescending(x => x.CellTier).ToList();
-            foreach (var item in cellsSort)
-            {
-                AddCell(item);
-            }
+            draw();
         }
-
-        void AddCell(TownshipGridCell cell)
+        
+        void draw()
         {
-            Panel p = new Panel()
+            screen = new Bitmap(canvas.Width, canvas.Height);
+            int size = 180, margin = 7, currX = margin, currY = margin, cX = canvas.Width / (size + margin), cY = township.Cells.Count / cX;
+            
+
+
+
+
+
+            using (var g = Graphics.FromImage(screen))
             {
-                Parent = flow_cells,
-                Size = new Size(180, 180),
-                BorderStyle = BorderStyle.None,
-                Padding = new Padding(2)
-            };
-            int index = township.Cells.IndexOf(cell);
-            township.Cells[index].Bounds = p.ClientRectangle;
-            switch (cell.CellSize)
-            {
-                case TownshipGridCell.TownCellSize.A1:
-                    break;
-                case TownshipGridCell.TownCellSize.A2:
-                    break;
-                case TownshipGridCell.TownCellSize.A3:
-                    break;
-                case TownshipGridCell.TownCellSize.B1:
-                    break;
-                case TownshipGridCell.TownCellSize.B2:
-                    break;
-                case TownshipGridCell.TownCellSize.C1:
-                    break;
-                case TownshipGridCell.TownCellSize.C2:
-                    break;
-                case TownshipGridCell.TownCellSize.D:
-                    break;
-                case TownshipGridCell.TownCellSize.X:
-                    break;
+                Console.WriteLine(cX + " - " + cY);
+                foreach (var cell in township.Cells.OrderByDescending(x => x.CellTier))
+                {
+                    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                    Color c = new Color();
+                    Image tier = Properties.Resources.tiers_0;
+                    switch (cell.CellTier)
+                    {
+                        case TownshipGridCell.TownCellTier.Tier_1:
+                            c = Color.FromArgb(23, 31, 102);
+                            break;
+                        case TownshipGridCell.TownCellTier.Tier_2:
+                            tier = Properties.Resources.tiers_1;
+                            c = Color.FromArgb(26, 59, 178);
+                            break;
+                        case TownshipGridCell.TownCellTier.Tier_3:
+                            tier = Properties.Resources.tiers_2;
+                            c = Color.FromArgb(19, 107, 196);
+                            break;
+                        case TownshipGridCell.TownCellTier.Tier_4:
+                            tier = Properties.Resources.Tiers_3;
+                            c = Color.FromArgb(0, 191, 255);
+                            break;
+                    }
+                    cell.Bounds = new Rectangle(currX, currY, size, size);
+                    g.DrawRectangle(new Pen(c, 1), cell.Bounds);
+                    g.DrawString("PLOT", new Font("Roboto Lt", 18), new SolidBrush(ForeColor), currX , currY);
+                    LinearGradientBrush lg = new LinearGradientBrush(new Point(0,0), new Point(size + margin, 0), Color.FromArgb(60,60,60), Color.FromArgb(19,19,19));
+                    g.FillRectangle(lg, currX + 5, currY + 30, size - 10, 1);
+                    g.DrawString("Size: " + cell.CellSize.ToString() + "\n" + "Tier: " + ((int)cell.CellTier + 1), Font, new SolidBrush(ForeColor), currX + margin, currY + 32);
+                    g.DrawImage(tier, new Rectangle(currX + size - 60 - 3, currY + 5, 60, 20));
+
+
+
+
+                    if (currX + (size + margin) > cX * (size + margin))
+                    {
+                        Console.WriteLine(currX + margin + size + " : " + cX * (size + margin));
+                        currX = margin;
+                        currY += margin + size;
+                    }
+                    else
+                    {
+                        currX += margin + size;
+                    }
+                }
+                canvas.Height = currY;
             }
-
-            Label l = new Label()
-            {
-                Parent = p,
-                Location = new Point(2,2),
-                Size = new Size(p.Width - 44, 40),
-                TextAlign = ContentAlignment.TopCenter,
-                Text = "Size: " + cell.CellSize.ToString() + "\n" + "Tier: " + ((int)cell.CellTier + 1)
-            };
-            PictureBox pb = new PictureBox()
-            {
-                Parent = p,
-                Location = new Point(p.Width - 44,2),
-                Size = new Size(40,20),
-                SizeMode = PictureBoxSizeMode.StretchImage
-            };
-
-            Color c = new Color();
-            switch (cell.CellTier)
-            {
-                case TownshipGridCell.TownCellTier.Tier_1:
-                    pb.Image = Properties.Resources.tiers_0;
-                    c = Color.FromArgb(23, 31, 102);
-                    break;
-                case TownshipGridCell.TownCellTier.Tier_2:
-                    pb.Image = Properties.Resources.tiers_1;
-                    c = Color.FromArgb(26, 59, 178);
-                    break;
-                case TownshipGridCell.TownCellTier.Tier_3:
-                    pb.Image = Properties.Resources.tiers_2;
-                    c = Color.FromArgb(19, 107, 196);
-                    break;
-                case TownshipGridCell.TownCellTier.Tier_4:
-                    pb.Image = Properties.Resources.Tiers_3;
-                    c = Color.FromArgb(0, 191, 255);
-                    break;
-            }
-
-            p.Paint += (s, e) =>
-            {
-                e.Graphics.DrawRectangle(new Pen(c, 2), p.ClientRectangle);
-            };
-
-            ExtendedPanel ep = new ExtendedPanel() {
-                Parent = p,
-                Size = p.Size,
-                Opacity = 0
-            };
-            ep.BringToFront();
-            ep.Click += (s, e) =>
-            {
-                Console.WriteLine(cell.CellTier);
-            };
-
+            canvas.Invalidate();
         }
-
+        
         private void flow_cells_MouseDoubleClick(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void label4_Paint(object sender, PaintEventArgs e)
+        {
+            LinearGradientBrush lb = new LinearGradientBrush(new Point(label_hr_2.Width / 2, 0), new Point(0,0), Color.FromArgb(70, 70, 70), Color.FromArgb(19, 19, 19));
+            LinearGradientBrush lb2 = new LinearGradientBrush(new Point(label_hr_2.Width / 2, 0), new Point(label_hr_2.Width, 0), Color.FromArgb(70, 70, 70), Color.FromArgb(19, 19, 19));
+            e.Graphics.FillRectangle(lb, 0,0,label_hr_2.Width / 2, 1);
+            e.Graphics.FillRectangle(lb2, label_hr_2.Width / 2, 0, label_hr_2.Width, 1);
+        }
+
+        private void canvas_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(screen, 0, 0);
+        }
+
+        private void canvas_Resize(object sender, EventArgs e)
+        {
+            screen = new Bitmap(canvas.Width, canvas.Height);
+            draw();
+        }
+
+        private void canvas_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            TownshipGridCell cell = township.Cells.Find(x => x.Bounds.Contains(e.Location));
+            if (cell != null && cell.CellTier < TownshipGridCell.TownCellTier.Tier_4)
+            {
+                cell.CellTier++;
+            }
+            draw();
+            Console.WriteLine(township.Cells.Find(x => x.Bounds.Contains(e.Location))?.CellTier);
+        }
+
+        private void Form_ShipView_Resize(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Width = Width - label_hr_2.Width - 15;
+            canvas.Width = flowLayoutPanel1.Width - 24;
+            flowLayoutPanel1.Height = Height - 140;
+            label3.Location = new Point(flowLayoutPanel1.Width - 9, label3.Location.Y);
+            label_hr_2.Location = new Point(flowLayoutPanel1.Width - 9, label_hr_2.Location.Y);
+            draw();
         }
     }
 }

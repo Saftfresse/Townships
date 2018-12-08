@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Townships.Classes
 {
-    public class LandTownship:Township
+    public class AirTownship:Township
     {
-
+        public AirTownship()
+        {
+            ShipType = TownshipType.Air;
+        }
 
     }
 }

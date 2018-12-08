@@ -27,7 +27,7 @@ namespace Townships
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            world.Ships.Add(new Township() { ShipType = Township.TownshipType.Water, Name = "New Pilgrim" });
+            world.Ships.Add(new WaterTownship() {  Name = "New Pilgrim" });
             Console.WriteLine(world.Ships.Count);
             world.Ships[0].Cells[0].Building = Collection.GetBuilding(Collection.Building.Factory1);
             Console.WriteLine(world.Ships[0].Cells[0].Building.Name);
