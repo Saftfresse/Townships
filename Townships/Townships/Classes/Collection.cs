@@ -8,7 +8,10 @@ namespace Townships.Classes
 {
     public static class Collection
     {
-        public static List<Classes.Building> Buildings = new List<Classes.Building>() { new Factory() { BuildingSize = TownshipGridCell.TownCellSize.B1, Name = "New Factory" } };
+        public static List<Classes.Building> Buildings = new List<Classes.Building>() {
+            new Factory() { BuildingSize = TownshipGridCell.TownCellSize.A2, Name = "Small Factory" },
+            new Factory() { BuildingSize = TownshipGridCell.TownCellSize.B1, Name = "Medium Factory" },
+            new Factory() { BuildingSize = TownshipGridCell.TownCellSize.C1, Name = "Big Factory" }};
 
         public static Classes.Building GetBuilding(Building _name)
         {
@@ -22,7 +25,9 @@ namespace Townships.Classes
 
         public enum Building
         {
-            Factory1
+            Factory_Small,
+            Factory_Medium,
+            Factory_Big
         }
     }
 }

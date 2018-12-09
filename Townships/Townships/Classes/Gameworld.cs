@@ -14,19 +14,19 @@ namespace Townships.Classes
             LandTownship sh = new LandTownship();
             for (int i = 0; i < r.Next(3,8); i++)
             {
-                sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_1, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() });
+                sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_1, CellSize = TownshipGridCell.TownCellSize.A2, Building = new Building() });
             }
             for (int i = 0; i < r.Next(5,7); i++)
             {
-                sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_2, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() });
+                sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_2, CellSize = TownshipGridCell.TownCellSize.B1, Building = new Building() });
             }
             for (int i = 0; i < r.Next(2,4); i++)
             {
-                sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_3, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() });
+                sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_3, CellSize = TownshipGridCell.TownCellSize.C1, Building = new Building() });
             }
             for (int i = 0; i < r.Next(1,3); i++)
             {
-                sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_4, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() });
+                sh.Cells.Add(new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_4, CellSize = TownshipGridCell.TownCellSize.D, Building = new Building() });
             }
             sh.Name = "The Ultimus";
             ships.Add(sh);
@@ -39,7 +39,9 @@ namespace Townships.Classes
                         new TownshipGridCell() { CellTier = TownshipGridCell.TownCellTier.Tier_2, CellSize = TownshipGridCell.TownCellSize.A1, Building = new Building() }});
             sh2.Name = "New Dawn";
             ships.Add(sh2);
-
+            LandTownship sh3 = LandTownship.GetNewLandTownship();
+            sh3.Name = "Berserk";
+            ships.Add(sh3);
         }
 
         List<Township> ships = new List<Township>();

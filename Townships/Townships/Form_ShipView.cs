@@ -17,6 +17,7 @@ namespace Townships
     {
         Township township;
         Bitmap screen;
+        TownshipGridCell selectedCell = null;
 
         public Form_ShipView(Township ship)
         {
@@ -32,6 +33,14 @@ namespace Townships
 
         private void Form_ShipView_Load(object sender, EventArgs e)
         {
+            foreach (var item in Collection.Buildings)
+            {
+                ComboBoxItem cbi = new ComboBoxItem();
+                cbi.Text = item.Name;
+                cbi.Value = item.Uid;
+                comboBox1.Items.Add(cbi);
+            }
+            comboBox1.SelectedIndex = 0;
             screen = new Bitmap(canvas.Width, canvas.Height);
             label1.Text = township.Name;
             label2.Text = township.ShipType.ToString() + " Type";
@@ -41,7 +50,7 @@ namespace Townships
         void draw()
         {
             screen = new Bitmap(canvas.Width, canvas.Height);
-            int size = 180, margin = 7, currX = margin, currY = margin, cX = canvas.Width / (size + margin), cY = township.Cells.Count / cX;
+            int size = 180, margin = 7, sizeAbs = size + margin, currX = margin, currY = 0, cX = canvas.Width / (size + margin), cY = (int)Math.Ceiling((double)township.Cells.Count / cX), nX = 0, nY = 1;
             
 
 
@@ -50,7 +59,7 @@ namespace Townships
 
             using (var g = Graphics.FromImage(screen))
             {
-                Console.WriteLine(cX + " - " + cY);
+                var cells = township.Cells.OrderByDescending(x => x.CellTier);
                 foreach (var cell in township.Cells.OrderByDescending(x => x.CellTier))
                 {
                     g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
@@ -75,28 +84,29 @@ namespace Townships
                             break;
                     }
                     cell.Bounds = new Rectangle(currX, currY, size, size);
+
+                    if (cell == selectedCell) g.FillRectangle(new SolidBrush(Color.FromArgb(25,25,25)), cell.Bounds);
+
                     g.DrawRectangle(new Pen(c, 1), cell.Bounds);
-                    g.DrawString("PLOT", new Font("Roboto Lt", 18), new SolidBrush(ForeColor), currX , currY);
-                    LinearGradientBrush lg = new LinearGradientBrush(new Point(0,0), new Point(size + margin, 0), Color.FromArgb(60,60,60), Color.FromArgb(19,19,19));
-                    g.FillRectangle(lg, currX + 5, currY + 30, size - 10, 1);
-                    g.DrawString("Size: " + cell.CellSize.ToString() + "\n" + "Tier: " + ((int)cell.CellTier + 1), Font, new SolidBrush(ForeColor), currX + margin, currY + 32);
-                    g.DrawImage(tier, new Rectangle(currX + size - 60 - 3, currY + 5, 60, 20));
+                    g.DrawString("PLOT", new Font("Roboto Lt", 18), new SolidBrush(ForeColor), cell.Bounds.X, cell.Bounds.Y);
+                    LinearGradientBrush lg = new LinearGradientBrush(new Point(0, 0), new Point(size + margin, 0), Color.FromArgb(60, 60, 60), Color.FromArgb(19, 19, 19));
+                    g.FillRectangle(lg, cell.Bounds.X + 5, cell.Bounds.Y + 30, size - 10, 1);
+                    g.DrawString("Size: " + cell.CellSize.ToString() + "\n" + "Tier: " + ((int)cell.CellTier + 1), Font, new SolidBrush(ForeColor), cell.Bounds.X + margin, cell.Bounds.Y + 32);
+                    g.DrawImage(tier, new Rectangle(cell.Bounds.X + size - 60 - 3, cell.Bounds.Y + 5, 60, 20));
 
 
-
-
-                    if (currX + (size + margin) > cX * (size + margin))
+                    if (currX + sizeAbs + size >= screen.Width)
                     {
-                        Console.WriteLine(currX + margin + size + " : " + cX * (size + margin));
                         currX = margin;
-                        currY += margin + size;
+                        currY += sizeAbs;
+                        nY++;
                     }
                     else
                     {
-                        currX += margin + size;
+                        currX += sizeAbs;
                     }
                 }
-                canvas.Height = currY;
+                canvas.Height = cY * sizeAbs;
             }
             canvas.Invalidate();
         }
@@ -127,13 +137,6 @@ namespace Townships
 
         private void canvas_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            TownshipGridCell cell = township.Cells.Find(x => x.Bounds.Contains(e.Location));
-            if (cell != null && cell.CellTier < TownshipGridCell.TownCellTier.Tier_4)
-            {
-                cell.CellTier++;
-            }
-            draw();
-            Console.WriteLine(township.Cells.Find(x => x.Bounds.Contains(e.Location))?.CellTier);
         }
 
         private void Form_ShipView_Resize(object sender, EventArgs e)
@@ -143,6 +146,30 @@ namespace Townships
             flowLayoutPanel1.Height = Height - 140;
             label3.Location = new Point(flowLayoutPanel1.Width - 9, label3.Location.Y);
             label_hr_2.Location = new Point(flowLayoutPanel1.Width - 9, label_hr_2.Location.Y);
+            draw();
+        }
+
+        private void canvas_MouseClick(object sender, MouseEventArgs e)
+        {
+            TownshipGridCell cell = township.Cells.Find(x => x.Bounds.Contains(e.Location));
+            if (cell != null) selectedCell = cell;
+            label_data.Text = string.Format("{0}\n{1}\n{2}", selectedCell.Building.Name, selectedCell.CellTier, selectedCell.CellSize);
+            draw();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (selectedCell.CellTier < TownshipGridCell.TownCellTier.Tier_4) selectedCell.CellTier++;
+            draw();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Building b = null;
+            Console.WriteLine(((ComboBoxItem)comboBox1.SelectedItem).Value);
+            selectedCell.Building = Collection.Buildings.Find(x => x.Uid == (Guid)((ComboBoxItem)comboBox1.SelectedItem).Value);
+            
+            label_data.Text = string.Format("{0}\n{1}\n{2}", selectedCell.Building.Name, selectedCell.CellTier, selectedCell.CellSize);
             draw();
         }
     }

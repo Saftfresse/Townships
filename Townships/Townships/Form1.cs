@@ -29,11 +29,9 @@ namespace Townships
         {
             world.Ships.Add(new WaterTownship() {  Name = "New Pilgrim" });
             Console.WriteLine(world.Ships.Count);
-            world.Ships[0].Cells[0].Building = Collection.GetBuilding(Collection.Building.Factory1);
+            world.Ships[0].Cells[0].Building = Collection.GetBuilding(Collection.Building.Factory_Small);
             Console.WriteLine(world.Ships[0].Cells[0].Building.Name);
             updateList();
-            Form_ShipView f = new Form_ShipView(world.Ships[0]);
-            f.Show();
         }
 
         void updateList()
