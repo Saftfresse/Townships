@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +29,14 @@ namespace Townships.Classes
         double baseIncome = 1;
         Guid uid = Guid.NewGuid();
         string name = "No Name Set";
+        string thumb = @"C:\Users\Sven\source\repos\Saftfresse\Townships\Townships\Townships\Resources\locked_plot.png";
         DistrictPlotCell.PlotCellSize buildingSize;
         List<BuildingLocation> requiredLocation = new List<BuildingLocation>();
+
+        public Image GetThumb()
+        {
+            return Image.FromFile(thumb);
+        }
 
         public enum BuildingLocation
         {
@@ -44,5 +51,6 @@ namespace Townships.Classes
         public double BaseCost { get => baseCost; set => baseCost = value; }
         public double BaseIncome { get => baseIncome; set => baseIncome = value; }
         public List<BuildingLocation> RequiredLocation { get => requiredLocation; set => requiredLocation = value; }
+        public string Thumb { get => thumb; set => thumb = value; }
     }
 }

@@ -45,19 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Buildings\FarmBuilding.cs" />
     <Compile Include="Classes\District.cs" />
     <Compile Include="Classes\DistrictPlotCell.cs" />
     <Compile Include="Classes\Townships\AirTownship.cs" />
-    <Compile Include="Classes\Building.cs" />
+    <Compile Include="Classes\Buildings\Building.cs" />
     <Compile Include="Classes\Collection.cs" />
-    <Compile Include="Classes\Factory.cs" />
+    <Compile Include="Classes\Buildings\Factory.cs" />
     <Compile Include="Classes\Gameworld.cs" />
     <Compile Include="Classes\Townships\LandTownship.cs" />
     <Compile Include="Classes\Townships\SpaceTownship.cs" />
     <Compile Include="Classes\Townships\Township.cs" />
     <Compile Include="Classes\TownshipGridCell.cs" />
     <Compile Include="Classes\Townships\WaterTownship.cs" />
-    <Compile Include="Classes\VacantBuilding.cs" />
+    <Compile Include="Classes\Buildings\VacantBuilding.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +119,24 @@
       <Project>{929ED699-938B-404D-90F9-628B742DD515}</Project>
       <Name>ProjectClassLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\locked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\locked_plot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\factory_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\farm_cow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house_2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

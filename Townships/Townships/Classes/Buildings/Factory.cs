@@ -11,6 +11,7 @@ namespace Townships.Classes
         public Factory()
         {
 
+            Thumb = @"C:\Users\Sven\source\repos\Saftfresse\Townships\Townships\Townships\Resources\factory_1.png";
         }
 
         public override void Update()

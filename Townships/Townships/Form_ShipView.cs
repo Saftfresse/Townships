@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Townships.Classes;
+using Townships.Classes.Buildings;
 
 namespace Townships
 {
@@ -115,23 +116,67 @@ namespace Townships
         {
             screen_district = new Bitmap(canvas_district.Width, canvas_district.Height);
             int rows = selectedCell.District.Plots.GetLength(0), cols = selectedCell.District.Plots.GetLength(1);
-            int margin = 7, size = (canvas_district.Width - cols * margin) / cols, sizeAbs = size + margin;
+            int margin = 7, size = (canvas_district.Width - cols * margin) / cols, sizeAbs = size + margin, startY = 0, startX = 0;
+            if (rows <= 1)
+            {
+                startY++;
+                size = (int)(size / 1.5);
+                sizeAbs = size + margin;
+            }
+            if (cols <= 1)
+            {
+                startX++;
+                size = (int)(size / 1.5);
+                sizeAbs = size + margin;
+            }
             using (var g = Graphics.FromImage(screen_district))
             {
                 g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-                for (int i = 0; i < selectedCell.District.Plots.GetLength(0); i++)
+                for (int i = startY; i < selectedCell.District.Plots.GetLength(0) + startY; i++)
                 {
-                    for (int j = 0; j < selectedCell.District.Plots.GetLength(1); j++)
+                    for (int j = startX; j < selectedCell.District.Plots.GetLength(1) + startX; j++)
                     {
-                        DistrictPlotCell cell = selectedCell.District.Plots[i, j];
-                        g.DrawRectangle(new Pen(Color.Red), new Rectangle(j * sizeAbs, i * sizeAbs, size, size));
+                        DistrictPlotCell cell = selectedCell.District.Plots[i - startY, j - startX];
+                        Rectangle bounds = new Rectangle(j * sizeAbs, i * sizeAbs, size, size);
+                        cell.Bounds = bounds;
                         if (radio_surface.Checked)
                         {
-                            g.DrawString(cell.UpperBuilding.Name, Font, new SolidBrush(Color.White), j * sizeAbs, i * sizeAbs);
+                            if (cell.UpperBuilding is VacantBuilding)
+                            {
+                                if (((VacantBuilding)cell.UpperBuilding).Unlockable)
+                                {
+                                    g.DrawImage(cell.UpperBuilding.GetThumb(), bounds);
+                                    g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.Black)), bounds);
+                                }
+                                else
+                                {
+                                    g.FillRectangle(new SolidBrush(Color.FromArgb(19,19,19)), bounds);
+                                }
+                            }
+                            else
+                            {
+                                g.DrawImage(cell.UpperBuilding.GetThumb(), bounds);
+                            }
+                            
                         }
                         else if (radio_underground.Checked)
                         {
-                            g.DrawString(cell.LowerBuilding.Name, Font, new SolidBrush(Color.White), j * sizeAbs, i * sizeAbs);
+                            if (cell.LowerBuilding is VacantBuilding)
+                            {
+                                if (((VacantBuilding)cell.LowerBuilding).Unlockable)
+                                {
+                                    g.DrawImage(cell.LowerBuilding.GetThumb(), bounds);
+                                    g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.Black)), bounds);
+                                }
+                                else
+                                {
+                                    g.FillRectangle(new SolidBrush(Color.FromArgb(19, 19, 19)), bounds);
+                                }
+                            }
+                            else
+                            {
+                                g.DrawImage(cell.LowerBuilding.GetThumb(), bounds);
+                            }
                         }
                     }
                 }
@@ -144,6 +189,7 @@ namespace Townships
             if (selectedCell != null)
             {
                 label_data.Text = string.Format("{0}\n{1}\n{2}\n{3}", selectedCell.Building.Name, selectedCell.CellTier, selectedCell.DistrictSize, selectedCell.District.GetTotalIncome());
+                label_districtName.Text = selectedCell.District.Name;
                 draw();
                 drawDistrict();
             }
@@ -248,9 +294,50 @@ namespace Townships
 
         private void button3_Click(object sender, EventArgs e)
         {
-            selectedCell.District.Plots[0, 0].UpperBuilding.Name = "Set over!";
-            selectedCell.District.Plots[0, 0].LowerBuilding.Name = "Set under!";
+            selectedCell.District.Plots[0, 0].UpperBuilding = new Factory();
+            selectedCell.District.Plots[0, 0].LowerBuilding = new FarmBuilding();
             drawDistrict();
+        }
+
+        private void label_districtName_Click(object sender, EventArgs e)
+        {
+            TextBox tb = new TextBox() {
+                BackColor = BackColor,
+                ForeColor = ForeColor,
+                Text = label_districtName.Text,
+                Location = new Point(label_districtName.Location.X - 1, label_districtName.Location.Y + 4),
+                Width = label_districtName.Width,
+                Parent = this,
+                Font = label_districtName.Font,
+                TextAlign = HorizontalAlignment.Center
+            };
+            tb.BringToFront();
+            tb.Focus();
+            tb.KeyDown += (s, eb) =>
+            {
+                if (eb.KeyCode == Keys.Enter)
+                {
+                    selectedCell.District.Name = tb.Text;
+                    tb.Dispose();
+                    updateDetails();
+                }
+            };
+            tb.LostFocus += (s, et) =>
+            {
+                selectedCell.District.Name = tb.Text;
+                tb.Dispose();
+                updateDetails();
+            };
+        }
+
+        private void Form_ShipView_Click(object sender, EventArgs e)
+        {
+            this.Focus();
+        }
+
+        private void panel1_Click(object sender, EventArgs e)
+        {
+            panel1.Focus();
         }
     }
 }

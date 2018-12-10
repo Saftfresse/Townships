@@ -33,13 +33,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label_hr_2 = new System.Windows.Forms.Label();
-            this.canvas = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label_data = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.canvas_district = new System.Windows.Forms.PictureBox();
             this.label_hr_3 = new System.Windows.Forms.Label();
             this.radio_surface = new System.Windows.Forms.RadioButton();
             this.radio_underground = new System.Windows.Forms.RadioButton();
@@ -47,13 +45,16 @@
             this.panel_config = new System.Windows.Forms.Panel();
             this.btn_config_close = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_command_center = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
+            this.btn_command_center = new System.Windows.Forms.Button();
+            this.label_districtName = new System.Windows.Forms.Label();
+            this.canvas_district = new System.Windows.Forms.PictureBox();
+            this.canvas = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.canvas_district)).BeginInit();
             this.panel_config.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas_district)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -102,17 +103,6 @@
             this.label_hr_2.TabIndex = 5;
             this.label_hr_2.Paint += new System.Windows.Forms.PaintEventHandler(this.label4_Paint);
             // 
-            // canvas
-            // 
-            this.canvas.Location = new System.Drawing.Point(3, 3);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(940, 383);
-            this.canvas.TabIndex = 6;
-            this.canvas.TabStop = false;
-            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
-            this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseClick);
-            this.canvas.Resize += new System.EventHandler(this.canvas_Resize);
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
@@ -127,9 +117,9 @@
             // label_data
             // 
             this.label_data.Font = new System.Drawing.Font("Roboto Lt", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_data.Location = new System.Drawing.Point(982, 140);
+            this.label_data.Location = new System.Drawing.Point(982, 173);
             this.label_data.Name = "label_data";
-            this.label_data.Size = new System.Drawing.Size(365, 218);
+            this.label_data.Size = new System.Drawing.Size(365, 185);
             this.label_data.TabIndex = 8;
             this.label_data.Text = "Type";
             // 
@@ -166,15 +156,6 @@
             this.comboBox1.Size = new System.Drawing.Size(360, 26);
             this.comboBox1.TabIndex = 11;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // canvas_district
-            // 
-            this.canvas_district.Location = new System.Drawing.Point(12, 522);
-            this.canvas_district.Name = "canvas_district";
-            this.canvas_district.Size = new System.Drawing.Size(630, 630);
-            this.canvas_district.TabIndex = 12;
-            this.canvas_district.TabStop = false;
-            this.canvas_district.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_district_Paint);
             // 
             // label_hr_3
             // 
@@ -247,6 +228,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label_districtName);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.btn_command_center);
             this.panel1.Controls.Add(this.label1);
@@ -268,6 +250,19 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1373, 1164);
             this.panel1.TabIndex = 18;
+            this.panel1.Click += new System.EventHandler(this.panel1_Click);
+            // 
+            // button3
+            // 
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(715, 616);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(366, 29);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "Upgrade Plot";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // btn_command_center
             // 
@@ -282,17 +277,36 @@
             this.btn_command_center.UseVisualStyleBackColor = false;
             this.btn_command_center.Click += new System.EventHandler(this.btn_command_center_Click);
             // 
-            // button3
+            // label_districtName
             // 
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(715, 616);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(366, 29);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "Upgrade Plot";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.label_districtName.Font = new System.Drawing.Font("Roboto Lt", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_districtName.Location = new System.Drawing.Point(982, 133);
+            this.label_districtName.Name = "label_districtName";
+            this.label_districtName.Size = new System.Drawing.Size(365, 40);
+            this.label_districtName.TabIndex = 19;
+            this.label_districtName.Text = "name";
+            this.label_districtName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_districtName.Click += new System.EventHandler(this.label_districtName_Click);
+            // 
+            // canvas_district
+            // 
+            this.canvas_district.Location = new System.Drawing.Point(12, 522);
+            this.canvas_district.Name = "canvas_district";
+            this.canvas_district.Size = new System.Drawing.Size(630, 630);
+            this.canvas_district.TabIndex = 12;
+            this.canvas_district.TabStop = false;
+            this.canvas_district.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_district_Paint);
+            // 
+            // canvas
+            // 
+            this.canvas.Location = new System.Drawing.Point(3, 3);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(940, 383);
+            this.canvas.TabIndex = 6;
+            this.canvas.TabStop = false;
+            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
+            this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseClick);
+            this.canvas.Resize += new System.EventHandler(this.canvas_Resize);
             // 
             // Form_ShipView
             // 
@@ -309,12 +323,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Township View";
             this.Load += new System.EventHandler(this.Form_ShipView_Load);
+            this.Click += new System.EventHandler(this.Form_ShipView_Click);
             this.Resize += new System.EventHandler(this.Form_ShipView_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.canvas_district)).EndInit();
             this.panel_config.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.canvas_district)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -342,5 +357,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_command_center;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label_districtName;
     }
 }

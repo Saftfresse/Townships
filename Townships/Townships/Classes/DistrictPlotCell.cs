@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,10 +32,12 @@ namespace Townships.Classes
         }
 
         PlotCellSize plotSize;
+        Rectangle bounds = new Rectangle();
 
         public PlotCellSize PlotSize { get => plotSize; set => plotSize = value; }
         public Building UpperBuilding { get => upperBuilding; set => upperBuilding = value; }
         public Building LowerBuilding { get => lowerBuilding; set => lowerBuilding = value; }
+        public Rectangle Bounds { get => bounds; set => bounds = value; }
 
         public double GetTotalIncome()
         {
