@@ -11,7 +11,7 @@ namespace Townships.Classes
     {
         public TownshipGridCell()
         {
-            building = new Building() { BuildingSize = TownCellSize.A1, Name = "--" };
+            building = new Building() { Name = "--" };
         }
 
         public enum TownCellTier
@@ -22,27 +22,29 @@ namespace Townships.Classes
             Tier_4
         }
 
-        public enum TownCellSize
+        public enum CellDistrictSize
         {
-            A1,
-            A2,
-            A3,
-            B1,
-            B2,
-            C1,
-            C2,
+            A,
+            B,
+            C,
             D,
+            E,
+            F,
             X
         }
 
+        
+
         Rectangle bounds = new Rectangle();
-        private TownCellSize cellSize;
         private TownCellTier cellTier;
+        CellDistrictSize districtSize;
         Building building;
+        District district = new District();
 
         public Building Building { get => building; set => building = value; }
-        public TownCellSize CellSize { get => cellSize; set => cellSize = value; }
         public TownCellTier CellTier { get => cellTier; set => cellTier = value; }
         public Rectangle Bounds { get => bounds; set => bounds = value; }
+        public District District { get => district; set => district = value; }
+        public CellDistrictSize DistrictSize { get => districtSize; set => districtSize = value; }
     }
 }

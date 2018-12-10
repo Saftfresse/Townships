@@ -9,9 +9,9 @@ namespace Townships.Classes
     public static class Collection
     {
         public static List<Classes.Building> Buildings = new List<Classes.Building>() {
-            new Factory() { BuildingSize = TownshipGridCell.TownCellSize.A2, Name = "Small Factory" },
-            new Factory() { BuildingSize = TownshipGridCell.TownCellSize.B1, Name = "Medium Factory" },
-            new Factory() { BuildingSize = TownshipGridCell.TownCellSize.C1, Name = "Big Factory" }};
+            new Factory() { BuildingSize = DistrictPlotCell.PlotCellSize.A1, Name = "Small Factory" },
+            new Factory() { BuildingSize = DistrictPlotCell.PlotCellSize.B1, Name = "Medium Factory" },
+            new Factory() { BuildingSize = DistrictPlotCell.PlotCellSize.C1, Name = "Big Factory" }};
 
         public static Classes.Building GetBuilding(Building _name)
         {

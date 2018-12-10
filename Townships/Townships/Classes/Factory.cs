@@ -13,6 +13,9 @@ namespace Townships.Classes
 
         }
 
-
+        public override void Update()
+        {
+            Console.WriteLine("lala");
+        }
     }
 }

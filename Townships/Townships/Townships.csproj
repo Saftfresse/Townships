@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\District.cs" />
+    <Compile Include="Classes\DistrictPlotCell.cs" />
     <Compile Include="Classes\Townships\AirTownship.cs" />
     <Compile Include="Classes\Building.cs" />
     <Compile Include="Classes\Collection.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Classes\Townships\Township.cs" />
     <Compile Include="Classes\TownshipGridCell.cs" />
     <Compile Include="Classes\Townships\WaterTownship.cs" />
+    <Compile Include="Classes\VacantBuilding.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
