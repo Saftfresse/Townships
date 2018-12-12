@@ -34,6 +34,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label_hr_2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.canvas = new System.Windows.Forms.PictureBox();
             this.label_data = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -45,16 +46,15 @@
             this.panel_config = new System.Windows.Forms.Panel();
             this.btn_config_close = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_districtName = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.btn_command_center = new System.Windows.Forms.Button();
-            this.label_districtName = new System.Windows.Forms.Label();
             this.canvas_district = new System.Windows.Forms.PictureBox();
-            this.canvas = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.panel_config.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvas_district)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -113,6 +113,17 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(974, 375);
             this.flowLayoutPanel1.TabIndex = 7;
             this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // canvas
+            // 
+            this.canvas.Location = new System.Drawing.Point(3, 3);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(940, 383);
+            this.canvas.TabIndex = 6;
+            this.canvas.TabStop = false;
+            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
+            this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseClick);
+            this.canvas.Resize += new System.EventHandler(this.canvas_Resize);
             // 
             // label_data
             // 
@@ -252,6 +263,17 @@
             this.panel1.TabIndex = 18;
             this.panel1.Click += new System.EventHandler(this.panel1_Click);
             // 
+            // label_districtName
+            // 
+            this.label_districtName.Font = new System.Drawing.Font("Roboto Lt", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_districtName.Location = new System.Drawing.Point(982, 133);
+            this.label_districtName.Name = "label_districtName";
+            this.label_districtName.Size = new System.Drawing.Size(365, 40);
+            this.label_districtName.TabIndex = 19;
+            this.label_districtName.Text = "name";
+            this.label_districtName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_districtName.Click += new System.EventHandler(this.label_districtName_Click);
+            // 
             // button3
             // 
             this.button3.FlatAppearance.BorderSize = 0;
@@ -277,17 +299,6 @@
             this.btn_command_center.UseVisualStyleBackColor = false;
             this.btn_command_center.Click += new System.EventHandler(this.btn_command_center_Click);
             // 
-            // label_districtName
-            // 
-            this.label_districtName.Font = new System.Drawing.Font("Roboto Lt", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_districtName.Location = new System.Drawing.Point(982, 133);
-            this.label_districtName.Name = "label_districtName";
-            this.label_districtName.Size = new System.Drawing.Size(365, 40);
-            this.label_districtName.TabIndex = 19;
-            this.label_districtName.Text = "name";
-            this.label_districtName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_districtName.Click += new System.EventHandler(this.label_districtName_Click);
-            // 
             // canvas_district
             // 
             this.canvas_district.Location = new System.Drawing.Point(12, 522);
@@ -296,17 +307,7 @@
             this.canvas_district.TabIndex = 12;
             this.canvas_district.TabStop = false;
             this.canvas_district.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_district_Paint);
-            // 
-            // canvas
-            // 
-            this.canvas.Location = new System.Drawing.Point(3, 3);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(940, 383);
-            this.canvas.TabIndex = 6;
-            this.canvas.TabStop = false;
-            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
-            this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseClick);
-            this.canvas.Resize += new System.EventHandler(this.canvas_Resize);
+            this.canvas_district.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_district_MouseClick);
             // 
             // Form_ShipView
             // 
@@ -326,10 +327,10 @@
             this.Click += new System.EventHandler(this.Form_ShipView_Click);
             this.Resize += new System.EventHandler(this.Form_ShipView_Resize);
             this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.panel_config.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.canvas_district)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.ResumeLayout(false);
 
         }

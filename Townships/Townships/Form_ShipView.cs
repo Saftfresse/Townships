@@ -20,6 +20,7 @@ namespace Townships
         Bitmap screen;
         Bitmap screen_district;
         TownshipGridCell selectedCell = null;
+        DistrictPlotCell selectedPlot = null;
 
         public Form_ShipView(Township ship)
         {
@@ -49,6 +50,7 @@ namespace Townships
             label2.Text = township.ShipType.ToString() + " Type";
             draw();
             selectedCell = township.Cells.OrderByDescending(x => x.CellTier).ElementAt(0);
+            selectedPlot = selectedCell.District.Plots[0,0];
             updateDetails();
             drawDistrict();
         }
@@ -117,16 +119,18 @@ namespace Townships
             screen_district = new Bitmap(canvas_district.Width, canvas_district.Height);
             int rows = selectedCell.District.Plots.GetLength(0), cols = selectedCell.District.Plots.GetLength(1);
             int margin = 7, size = (canvas_district.Width - cols * margin) / cols, sizeAbs = size + margin, startY = 0, startX = 0;
-            if (rows <= 1)
+            if (rows == 1 && cols == 1)
             {
                 startY++;
-                size = (int)(size / 1.5);
+                startX++;
+                size = (int)(size / 3);
                 sizeAbs = size + margin;
             }
-            if (cols <= 1)
+            if (rows == 2 && cols == 2)
             {
+                startY++;
                 startX++;
-                size = (int)(size / 1.5);
+                size = (int)(size / 2);
                 sizeAbs = size + margin;
             }
             using (var g = Graphics.FromImage(screen_district))
@@ -146,7 +150,8 @@ namespace Townships
                                 if (((VacantBuilding)cell.UpperBuilding).Unlockable)
                                 {
                                     g.DrawImage(cell.UpperBuilding.GetThumb(), bounds);
-                                    g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.Black)), bounds);
+                                    if (cell == selectedPlot) g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Black)), bounds);
+                                    else g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.Black)), bounds);
                                 }
                                 else
                                 {
@@ -166,7 +171,8 @@ namespace Townships
                                 if (((VacantBuilding)cell.LowerBuilding).Unlockable)
                                 {
                                     g.DrawImage(cell.LowerBuilding.GetThumb(), bounds);
-                                    g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.Black)), bounds);
+                                    if (cell == selectedPlot) g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Black)), bounds);
+                                    else g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.Black)), bounds);
                                 }
                                 else
                                 {
@@ -188,7 +194,7 @@ namespace Townships
         {
             if (selectedCell != null)
             {
-                label_data.Text = string.Format("{0}\n{1}\n{2}\n{3}", selectedCell.Building.Name, selectedCell.CellTier, selectedCell.DistrictSize, selectedCell.District.GetTotalIncome());
+                label_data.Text = string.Format("{0}\n{1}\nSize: {2}\nIncome: {3}\nPlots {4}", selectedCell.Building.Name, selectedCell.CellTier, selectedCell.DistrictSize, selectedCell.District.GetTotalIncome(), selectedCell.District.Plots.Length * 2);
                 label_districtName.Text = selectedCell.District.Name;
                 draw();
                 drawDistrict();
@@ -338,6 +344,26 @@ namespace Townships
         private void panel1_Click(object sender, EventArgs e)
         {
             panel1.Focus();
+        }
+
+        private void canvas_district_MouseClick(object sender, MouseEventArgs e)
+        {
+            bool found = false;
+            foreach (var item in selectedCell.District.Plots)
+            {
+                if (item.Bounds.Contains(e.Location))
+                {
+                    selectedPlot = item;
+                    found = true;
+                }
+            }
+            if (found)
+            {
+                selectedCell.District.UnlockNextPlot(radio_surface.Checked);
+                if (radio_surface.Checked) ((VacantBuilding)selectedPlot.UpperBuilding).Unlocked = true;
+                else ((VacantBuilding)selectedPlot.LowerBuilding).Unlocked = true;
+                updateDetails();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectClassLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,12 @@ namespace Townships.Classes
     {
         public District()
         {
+            initPlots();
+        }
 
-
+        public District(int width = 3, int height = 3)
+        {
+            plots = new DistrictPlotCell[height, width];
             initPlots();
         }
 
@@ -29,13 +34,81 @@ namespace Townships.Classes
         }
 
         string name = "New District";
-        DistrictPlotCell[,] plots = new DistrictPlotCell[1,1];
+        DistrictPlotCell[,] plots = new DistrictPlotCell[2,2];
 
         public string Name { get => name; set => name = value; }
         public DistrictPlotCell[,] Plots { get => plots; set {
                 plots = value;
                 initPlots();
             } }
+
+        public void UnlockNextPlot(bool surface)
+        {
+            Tools.ResetRandomSeed();
+            int unlockedSur = 0;
+            int unlockedUn = 0;
+            foreach (var item in plots)
+            {
+                if (surface)
+                {
+                    if (item.UpperBuilding is VacantBuilding)
+                    {
+                        if (((VacantBuilding)item.UpperBuilding).Unlockable)
+                        {
+                            unlockedSur++;
+                        }
+                    }
+                }
+                else
+                {
+                    if (item.LowerBuilding is VacantBuilding)
+                    {
+                        if (((VacantBuilding)item.LowerBuilding).Unlockable)
+                        {
+                            unlockedUn++;
+                        }
+                    }
+                }
+            }
+            if (surface)
+            {
+                if (unlockedSur < Plots.Length)
+                {
+                    bool ready = false;
+                    while (!ready)
+                    {
+                        DistrictPlotCell plot = Plots[Tools.GetRandom(0, Plots.GetLength(0)), Tools.GetRandom(0, Plots.GetLength(1))];
+                        if (plot.UpperBuilding is VacantBuilding)
+                        {
+                            if (!((VacantBuilding)plot.UpperBuilding).Unlockable)
+                            {
+                                ((VacantBuilding)plot.UpperBuilding).Unlockable = true;
+                                ready = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (unlockedUn < plots.Length)
+                {
+                    bool ready = false;
+                    while (!ready)
+                    {
+                        DistrictPlotCell plot = Plots[Tools.GetRandom(0, Plots.GetLength(0)), Tools.GetRandom(0, Plots.GetLength(1))];
+                        if (plot.LowerBuilding is VacantBuilding)
+                        {
+                            if (!((VacantBuilding)plot.LowerBuilding).Unlockable)
+                            {
+                                ((VacantBuilding)plot.LowerBuilding).Unlockable = true;
+                                ready = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         public double GetTotalIncome()
         {
