@@ -12,6 +12,7 @@ namespace Townships.Classes
         {
 
             Thumb = @"C:\Users\Sven\source\repos\Saftfresse\Townships\Townships\Townships\Resources\factory_1.png";
+            ThumbBackup = @"C:\Users\Greinert\source\repos\Saftfresse\Townships\Townships\Townships\Resources\factory_1.png";
         }
 
         public override void Update()

@@ -59,7 +59,7 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Dirty War", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(1034, 32);
@@ -213,7 +213,7 @@
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.label4.Location = new System.Drawing.Point(648, 475);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(1, 677);
+            this.label4.Size = new System.Drawing.Size(1, 580);
             this.label4.TabIndex = 16;
             // 
             // panel_config
@@ -303,7 +303,7 @@
             // 
             this.canvas_district.Location = new System.Drawing.Point(12, 522);
             this.canvas_district.Name = "canvas_district";
-            this.canvas_district.Size = new System.Drawing.Size(630, 630);
+            this.canvas_district.Size = new System.Drawing.Size(560, 560);
             this.canvas_district.TabIndex = 12;
             this.canvas_district.TabStop = false;
             this.canvas_district.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_district_Paint);
@@ -314,7 +314,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(19)))));
-            this.ClientSize = new System.Drawing.Size(1371, 1164);
+            this.ClientSize = new System.Drawing.Size(1371, 1085);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel_config);
             this.Font = new System.Drawing.Font("Roboto Lt", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

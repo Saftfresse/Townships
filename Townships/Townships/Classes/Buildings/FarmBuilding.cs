@@ -11,6 +11,7 @@ namespace Townships.Classes.Buildings
         public FarmBuilding()
         {
             Thumb = @"C:\Users\Sven\source\repos\Saftfresse\Townships\Townships\Townships\Resources\farm_cow.png";
+            ThumbBackup = @"C:\Users\Greinert\source\repos\Saftfresse\Townships\Townships\Townships\Resources\farm_cow.png";
         }
 
         int animals = 5;
