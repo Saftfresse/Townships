@@ -46,7 +46,7 @@
             this.view_ships.Location = new System.Drawing.Point(55, 26);
             this.view_ships.Name = "view_ships";
             this.view_ships.Scrollable = false;
-            this.view_ships.Size = new System.Drawing.Size(620, 397);
+            this.view_ships.Size = new System.Drawing.Size(688, 478);
             this.view_ships.TabIndex = 0;
             this.view_ships.UseCompatibleStateImageBehavior = false;
             this.view_ships.View = System.Windows.Forms.View.Details;

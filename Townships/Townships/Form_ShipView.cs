@@ -300,8 +300,14 @@ namespace Townships
 
         private void button3_Click(object sender, EventArgs e)
         {
-            selectedCell.District.Plots[0, 0].UpperBuilding = new Factory();
-            selectedCell.District.Plots[0, 0].LowerBuilding = new FarmBuilding();
+            if (selectedPlot.LowerBuilding.Vacant && radio_underground.Checked)
+            {
+                selectedPlot.LowerBuilding = new Factory();
+            }
+            if (selectedPlot.UpperBuilding.Vacant && radio_surface.Checked)
+            {
+                selectedPlot.UpperBuilding = new Factory();
+            }
             drawDistrict();
         }
 
